@@ -1,0 +1,265 @@
+/* style.css */
+@import 'theme.css';
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: var(--base-font-size);
+    line-height: 20px;
+    font-weight: 400;
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    background: var(--background-gradient); /* Using the gradient from theme.css */
+    padding: var(--padding-large);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 98%;
+    height: 90%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0;
+}
+
+/* Make the header and filter rows sticky */
+.table-container thead th {
+    position: sticky;
+    background: var(--primary-color);
+    z-index: var(--z-index-header);
+    font-weight: 600; /* Softer font weight */
+    font-size: 1rem; /* Adjusted font size */
+    color: var(--text-color);
+    padding: var(--padding-small) var(--padding-medium);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table-container thead tr:first-child th {
+    top: 0; /* Header row sticks to the top */
+}
+
+.table-container thead tr:nth-child(2) th {
+    top: 45px; /* Adjust this to match the height of your header row */
+    z-index: var(--z-index-filter);
+}
+
+/* Styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+table th, table td {
+    padding: var(--padding-medium);
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+table th {
+    cursor: pointer;
+    color: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+table tr:nth-child(odd) {
+    background-color: var(--light-background-color);
+}
+
+table tr:nth-child(even) {
+    background-color: var(--lighter-background-color);
+}
+
+/* Filter input styling */
+.filter-input {
+    background: var(--background-color);
+    border: 0;
+    outline: none;
+    width: 100%;
+    font-size: var(--filter-font-size);
+    padding-bottom: var(--padding-small);
+    transition: padding 0.3s 0.2s ease;
+    box-sizing: border-box;
+}
+
+.filter-input:focus {
+    padding-bottom: var(--padding-small);
+}
+
+.filter-input:focus + .line:after {
+    transform: scaleX(1);
+}
+
+.field {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.field .line {
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    background: var(--line-color);
+}
+
+.field .line:after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    background: var(--highlight-color);
+}
+
+/* Spinner Styles */
+#spinner {
+    display: none;
+    position: fixed;
+    z-index: var(--z-index-spinner);
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    border: 8px solid var(--spinner-border-color);
+    border-top: 8px solid var(--spinner-highlight-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: var(--padding-large) 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: var(--padding-large);
+    text-align: center;
+}
+
+p {
+    color: var(--text-color);
+    margin-bottom: var(--padding-large);
+    text-align: center;
+}
+
+form#dateForm {
+    margin-bottom: var(--padding-large);
+    text-align: center;
+}
+
+form#dateForm label {
+    margin-right: var(--padding-small);
+    font-weight: bold;
+}
+
+form#dateForm input[type="date"] {
+    margin-right: var(--padding-medium);
+    padding: var(--padding-small);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+form#dateForm button {
+    padding: var(--padding-small) var(--padding-medium);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form#dateForm button:hover {
+    background-color: var(--secondary-color);
+}
+
+@media screen and (max-width: 580px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    table tr {
+        padding: 14px 0 7px;
+    }
+
+    table tr.header {
+        padding: 0;
+        height: 6px;
+    }
+
+    table tr.header th {
+        display: none;
+    }
+
+    table td {
+        margin-bottom: 10px;
+        padding: 2px 16px;
+        display: block;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    table td:before {
+        margin-bottom: 3px;
+        content: attr(data-title);
+        min-width: var(--small-font-size);
+        font-size: var(--small-font-size);
+        line-height: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #969696;
+        position: absolute;
+        left: 6px;
+        top: 6px;
+    }
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}

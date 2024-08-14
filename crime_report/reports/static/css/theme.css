@@ -1,0 +1,39 @@
+/* theme.css */
+
+/* Color Variables */
+/* These variables define the main color palette for the application */
+:root {
+    --primary-color: #86a3c3; /* Muted teal for primary elements */
+    --secondary-color: #4b647a; /* Muted blue for secondary elements */
+    --background-color: #f0f4f8; /* Very light grayish-blue background */
+    --text-color: #2f4f4f; /* Dark slate gray for text */
+    --light-background-color: #e9eff5; /* Soft light gray-blue for odd table rows */
+    --lighter-background-color: #f4f8fc; /* Even softer gray-blue for even table rows */
+    --border-color: #c0d3e0; /* Softer, cooler border color */
+    --highlight-color: #86a3c3; /* Muted teal for highlights */
+    --line-color: #b0c4c7; /* Slightly softer line color */
+    --spinner-border-color: #d1e1e8; /* Softer spinner border */
+    --spinner-highlight-color: #86a3c3; /* Muted teal for spinner highlight */
+
+    /* Font Sizes */
+    /* These variables define the font sizes used throughout the application */
+    --base-font-size: 14px; /* Base font size for body text */
+    --filter-font-size: 1em; /* Font size for filter inputs */
+    --small-font-size: 10px; /* Font size for smaller text elements */
+
+    /* Padding and Spacing */
+    /* These variables control padding and margin throughout the application */
+    --padding-small: 5px; /* Small padding */
+    --padding-medium: 10px; /* Medium padding */
+    --padding-large: 20px; /* Large padding */
+
+    /* Z-Index Values */
+    /* These variables control the stacking order of elements */
+    --z-index-header: 3; /* Z-index for table headers */
+    --z-index-filter: 2; /* Z-index for filter rows */
+    --z-index-spinner: 999; /* Z-index for loading spinner */
+
+    /* Background Gradient */
+    /* This variable defines the background gradient used for the body */
+    --background-gradient: linear-gradient(to right, #f0f4f8, #f0f4f8); /* Very light grayish-blue gradient */
+}

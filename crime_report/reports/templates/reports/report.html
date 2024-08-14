@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Report</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Crime Report</h1>
+        <p>Summary of crime data within the specified date range.</p>
+
+        <form id="datetimeForm" method="POST" action="{% url 'report' %}">
+            {% csrf_token %}
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                {% for key, value in locations.items %}
+                <option value="{{ key }}" {% if location == key %}selected{% endif %}>{{ value.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ start_date|default_if_none:'' }}">
+            
+            <label for="start_time">Start Time:</label>
+            <input type="time" id="start_time" name="start_time" value="{{ start_time|default_if_none:'00:00' }}">
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ end_date|default_if_none:'' }}">
+            
+            <label for="end_time">End Time:</label>
+            <input type="time" id="end_time" name="end_time" value="{{ end_time|default_if_none:'00:00' }}">
+        
+            <button type="submit">Generate</button>
+        </form>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <div class="table-container">
+            {{ table|safe }}
+        </div>
+    </div>
+
+    <!-- Spinner for loading indicator -->
+    <div id="spinner"></div>
+
+    <!-- Include external JavaScript files -->
+    <script>
+        const filterWorkerPath = "{% static 'js/filter-worker.js' %}";
+    </script>
+    <script src="{% static 'js/table-helper.js' %}"></script>
+</body>
+</html>
